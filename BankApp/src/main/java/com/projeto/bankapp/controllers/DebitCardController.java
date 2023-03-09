@@ -5,6 +5,8 @@ import com.projeto.bankapp.entities.DebitCardEntity;
 import com.projeto.bankapp.repositories.AccountRepository;
 import com.projeto.bankapp.repositories.DebitCardRepository;
 import com.projeto.bankapp.services.DebitCardService;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -31,20 +33,27 @@ public class DebitCardController {
 
 
     @PostMapping("/createdebit")
-    public ModelAndView createDebitCard(@RequestParam("account") Long accountId,
-                                  @RequestParam("pin") int pin,
-                                  Model model) {
+    public ModelAndView createDebitCard(@RequestParam("account") long accountId,
+                                        @ModelAttribute("debitCardForm") DebitCardForm debitCardForm,
+                                        Model model) {
         AccountEntity account = accountRepository.findById(accountId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid account ID"));
         int randomNum = ThreadLocalRandom.current().nextInt(1000, 10000);
         DebitCardEntity debitCard = new DebitCardEntity();
         debitCard.setNumerodecartao(randomNum);
         debitCard.setConta(account.getNumerodeconta());
-        debitCard.setPin(pin);
+        debitCard.setPin(debitCardForm.getPin());
         debitCardRepository.save(debitCard);
         model.addAttribute("debitCard", debitCard);
         return new ModelAndView("afterlogin");
     }
+
+    @Getter
+    @Setter
+    public static class DebitCardForm {
+        private int pin;
+    }
+
 
 
 }
