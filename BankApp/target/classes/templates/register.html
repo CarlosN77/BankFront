@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register New Client</title>
+    <style>
+        body {
+            background-color: lightgrey;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background-color: DarkSlateBlue;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        main {
+            margin: 50px auto;
+            text-align: center;
+            background-color: white;
+            border-radius: 5px;
+            padding: 20px;
+            width: 50%;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        input[type=number], input[type=text], input[type=password], input[type=date], input[type=tel], input[type=email] {
+            margin-bottom: 10px;
+            padding: 10px;
+            width: 100%;
+            font-size: 16px;
+            border: 2px solid darkgrey;
+            border-radius: 4px;
+        }
+
+        input[type=submit] {
+            background-color: darksalmon;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type=submit]:hover {
+            background-color: salmon;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Rumos Bank</h1>
+</header>
+<main>
+    <h2>Register New Client</h2>
+    <form method="POST" action="/register">
+        <input type="number" name="nif" placeholder="NIF">
+        <input type="text" name="primeironome" placeholder="First Name">
+        <input type="text" name="segundonome" placeholder="Last Name">
+        <input type="password" name="password" placeholder="Password">
+        <input type="Date" name="datanascimento" placeholder="Date of Birth">
+        <input type="tel" name="telefone" placeholder="Phone Number">
+        <input type="tel" name="telemovel" placeholder="Mobile Number">
+        <input type="email" name="email" placeholder="Email">
+        <input type="text" name="profissao" placeholder="Profession">
+        <input type="submit" value="Register">
+    </form>
+</main>
+<footer>
+    <p>&copy; 2023 Rumos Bank</p>
+</footer>
+</body>
+</html>
+
+
+
+
