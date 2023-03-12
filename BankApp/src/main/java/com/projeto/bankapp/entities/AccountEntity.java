@@ -20,13 +20,25 @@ public class AccountEntity {
     @Column(name = "numerodeconta", nullable = false)
     private Integer numerodeconta;
 
-
     @Column(nullable = false)
     private int titularprincipal;
+
     @Column(nullable = false)
     private double saldo;
 
+    @ElementCollection
+    @CollectionTable(name = "titulares_secundarios", joinColumns = @JoinColumn(name = "numerodeconta"))
+    @Column(name = "titular_secundario")
+    private List<Integer> titularessecundarios;
 
-
+    @Override
+    public String toString() {
+        return "AccountEntity{" +
+                "numerodeconta=" + numerodeconta +
+                ", saldo=" + saldo +
+                ", titularprincipal='" + titularprincipal + '\'' +
+                ", titularessecundarios=" + titularessecundarios +
+                '}';
+    }
 
 }

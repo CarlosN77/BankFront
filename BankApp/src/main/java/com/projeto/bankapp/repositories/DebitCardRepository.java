@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DebitCardRepository extends JpaRepository<DebitCardEntity, Integer> {
+    DebitCardEntity findByConta(long conta);
 }

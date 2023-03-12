@@ -77,15 +77,15 @@
 <main>
     <h2>Register New Client</h2>
     <form method="POST" action="/register">
-        <input type="number" name="nif" placeholder="NIF">
-        <input type="text" name="primeironome" placeholder="First Name">
-        <input type="text" name="segundonome" placeholder="Last Name">
-        <input type="password" name="password" placeholder="Password">
-        <input type="Date" name="datanascimento" placeholder="Date of Birth">
-        <input type="tel" name="telefone" placeholder="Phone Number">
-        <input type="tel" name="telemovel" placeholder="Mobile Number">
-        <input type="email" name="email" placeholder="Email">
-        <input type="text" name="profissao" placeholder="Profession">
+        <input type="number" name="nif" placeholder="NIF" min="100000000" max="999999999">
+        <input type="text" name="primeironome" placeholder="First Name" required>
+        <input type="text" name="segundonome" placeholder="Last Name" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <input type="Date" name="datanascimento" placeholder="Date of Birth" required>
+        <input type="tel" name="telefone" placeholder="Phone Number" pattern="[0-9]{9}" required>
+        <input type="tel" name="telemovel" placeholder="Mobile Number" pattern="[0-9]{9}" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="text" name="profissao" placeholder="Profession" required>
         <input type="submit" value="Register">
     </form>
 </main>
@@ -94,6 +94,7 @@
 </footer>
 </body>
 </html>
+
 
 
 

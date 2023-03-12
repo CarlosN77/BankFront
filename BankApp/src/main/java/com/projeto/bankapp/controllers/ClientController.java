@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.naming.AuthenticationException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.*;
 
 @Controller
 public class ClientController {
@@ -62,6 +62,27 @@ public class ClientController {
             @RequestParam int nif,
             @RequestParam String password) {
 
+        // check if client with the same NIF already exists
+        ClientEntity existingClient = clientRepository.findByNif(nif);
+        if (existingClient != null) {
+            // a client with the same NIF already exists, return an error view
+            ModelAndView mav = new ModelAndView("a");
+            mav.addObject("errorMsg", "A client with the same NIF already exists");
+            return mav;
+        }
+
+        // calculate age of client
+        LocalDate birthdate = LocalDate.parse(datanascimento);
+        LocalDate now = LocalDate.now();
+        int age = Period.between(birthdate, now).getYears();
+        if (age < 18) {
+            // client is less than 18 years old, return an error view
+            ModelAndView mav = new ModelAndView("a");
+            mav.addObject("errorMsg", "You must be at least 18 years old to create an account");
+            return mav;
+        }
+
+        // create a new client account
         ClientEntity client = new ClientEntity();
         Random rand = new Random();
         int accountNumber = rand.nextInt(9000) + 1000; // generate random 4-digit account number
@@ -86,6 +107,7 @@ public class ClientController {
     }
 
 
+
     @PostMapping("/login")
     public String login(
             @RequestParam Integer nif,
@@ -104,13 +126,17 @@ public class ClientController {
 
 
     @GetMapping("/afterlogin")
-    public String showafterlogin(Model model, HttpSession session) {
+    public String afterlogin(HttpSession session, Model model) throws AuthenticationException {
         ClientEntity cliente = (ClientEntity) session.getAttribute("cliente");
-            model.addAttribute("cliente", cliente);
-            return "afterlogin";
+        if (cliente == null) {
+            throw new AuthenticationException("User not logged in");
         }
+        model.addAttribute("cliente", cliente);
 
+        List<AccountEntity> accounts = accountRepository.findByTitularprincipal(cliente.getNif());
 
+        return "afterlogin";
+    }
 
 
 

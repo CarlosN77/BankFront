@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Error Page</title>
+  <title>Create Debit Card</title>
   <style>
     body {
       background-color: lightgrey;
@@ -11,7 +11,7 @@
     }
 
     header {
-      background-color: darkslateblue;
+      background-color: DarkSlateBlue;
       color: white;
       padding: 20px;
       text-align: center;
@@ -23,23 +23,25 @@
       background-color: white;
       border-radius: 5px;
       padding: 20px;
-      max-width: 600px;
-      border: 1px solid darkgrey;
+      width: 50%;
     }
 
-    h1 {
-      color: white;
+    label {
+      display: inline-block;
+      margin-bottom: 5px;
+      font-weight: bold;
     }
 
-    h2 {
-      color: darkslateblue;
+    input[type=text], input[type=password] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      box-sizing: border-box;
+      border: 2px solid darkgrey;
+      border-radius: 4px;
     }
 
-    p {
-      margin: 20px 0;
-    }
-
-    button {
+    input[type=submit] {
       background-color: darksalmon;
       color: white;
       padding: 10px 20px;
@@ -50,15 +52,14 @@
       font-size: 16px;
       font-weight: bold;
       transition: background-color 0.3s ease;
-      border: none;
     }
 
-    button:hover {
-      background-color: orange;
+    input[type=submit]:hover {
+      background-color: salmon;
     }
 
     footer {
-      background-color: darkslateblue;
+      background-color: DarkSlateBlue;
       color: white;
       padding: 10px;
       text-align: center;
@@ -73,9 +74,14 @@
   <h1>Rumos Bank</h1>
 </header>
 <main>
-  <h2>Oops, something went wrong!</h2>
-  <p th:text="${errorMsg}"></p>
-  <button onclick="window.history.back()">Go Back</button>
+  <h2>Create Debit Card</h2>
+  <form th:action="@{/createdebit}" th:method="post" th:object="${debitCardForm}">
+    <label for="accountNumber">Account Number:</label>
+    <input type="text" name="accountNumber" placeholder="Enter Account Number" required>
+    <label for="pin">PIN:</label>
+    <input type="password" name="pin" placeholder="Enter PIN" pattern="[0-9]*" maxlength="4" required>
+    <button type="submit">Create Debit Card</button>
+  </form>
 </main>
 <footer>
   <p>&copy; 2023 Rumos Bank</p>

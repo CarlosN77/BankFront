@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
-  <title>Create Debit Card</title>
+  <title>Error Page</title>
   <style>
     body {
       background-color: lightgrey;
@@ -11,7 +11,7 @@
     }
 
     header {
-      background-color: DarkSlateBlue;
+      background-color: darkslateblue;
       color: white;
       padding: 20px;
       text-align: center;
@@ -23,25 +23,23 @@
       background-color: white;
       border-radius: 5px;
       padding: 20px;
-      width: 50%;
+      max-width: 600px;
+      border: 1px solid darkgrey;
     }
 
-    label {
-      display: inline-block;
-      margin-bottom: 5px;
-      font-weight: bold;
+    h1 {
+      color: white;
     }
 
-    input[type=text], input[type=password], select {
-      width: 100%;
-      padding: 12px 20px;
-      margin: 8px 0;
-      box-sizing: border-box;
-      border: 2px solid darkgrey;
-      border-radius: 4px;
+    h2 {
+      color: darkslateblue;
     }
 
-    input[type=submit] {
+    p {
+      margin: 20px 0;
+    }
+
+    button {
       background-color: darksalmon;
       color: white;
       padding: 10px 20px;
@@ -52,14 +50,15 @@
       font-size: 16px;
       font-weight: bold;
       transition: background-color 0.3s ease;
+      border: none;
     }
 
-    input[type=submit]:hover {
-      background-color: salmon;
+    button:hover {
+      background-color: orange;
     }
 
     footer {
-      background-color: DarkSlateBlue;
+      background-color: darkslateblue;
       color: white;
       padding: 10px;
       text-align: center;
@@ -74,16 +73,9 @@
   <h1>Rumos Bank</h1>
 </header>
 <main>
-  <h2>Create Debit Card</h2>
-  <form action="/createdebit" method="post" th:object="${debitCardForm}">
-    <select name="accountId">
-      <option th:each="account : ${accounts}" th:value="${account.numerodeconta}" th:text="${account.numerodeconta}"></option>
-    </select>
-    <input type="password" name="pin" placeholder="Enter PIN" pattern="[0-9]*" maxlength="4" />
-    <button type="submit">Create Debit Card</button>
-  </form>
-
-
+  <h2>Oops, something went wrong!</h2>
+  <p th:text="${errorMsg}"></p>
+  <button onclick="window.history.back()">Go Back</button>
 </main>
 <footer>
   <p>&copy; 2023 Rumos Bank</p>

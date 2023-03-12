@@ -11,5 +11,6 @@ public interface ClientRepository extends JpaRepository<ClientEntity, String> {
 
 
     ClientEntity findByNifAndPassword(Integer nif, String password);
+    ClientEntity findByNif(Integer nif);
 
 }
